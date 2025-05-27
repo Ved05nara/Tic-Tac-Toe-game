@@ -2,7 +2,7 @@
 
 A feature-rich, interactive Tic-Tac-Toe game built with HTML5, CSS3, and JavaScript.
 
-![Game Screenshot](https://i.imgur.com/JK7w3Yl.png) *(Consider adding an actual screenshot)*
+![image](https://github.com/user-attachments/assets/500a9b29-f62f-4ef1-a6c4-f571abd56d40)
 
 ## Features 
 
