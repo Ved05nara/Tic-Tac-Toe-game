@@ -1,20 +1,59 @@
-# Tic-Tac-Toe-game
-A fun game of tic-tac-toe using HTML, CSS, JS
+# Tic-Tac-Toe Game 🎮
 
-##About:
-We have developed a simple 2-player tic-tac-toe game with various features, using HTML5, CSS3 and JavaScript.
+A feature-rich, interactive Tic-Tac-Toe game built with HTML5, CSS3, and JavaScript.
 
-##Features:
-1. Interactive Canvas on which we can add X or 0.
-2. An option for a 3x3 board/ 4x4 board/ 5x5 board
-3. An option for a Standard X-0 game as well as a reverse X-0 game. For reverse X-0 the player who doesn't make the 3/4/5 in a row, wins. i.e., the loser in the normal X-0, is the winner in the reverse X-0.
+![Game Screenshot](https://i.imgur.com/JK7w3Yl.png) *(Consider adding an actual screenshot)*
 
-##Demo Video:
+## Features 
 
-https://drive.google.com/file/d/1Vxp5G3lbUUrtqCqX4XahkWwozbC_0T_d/view?usp=sharing
+### Game Modes
+- **Standard Mode**: Classic rules - first to get X in a row wins
+- **Reverse Mode**: Strategic twist - last to complete X in a row wins
 
+### Customization Options
+- Adjustable board sizes:
+  - 3×3 (Classic)
+  - 4×4 (Challenge)
+  - 5×5 (Expert)
+- Player name customization
+- Score tracking across games
 
+### Immersive Experience
+- Celebration confetti animation on wins 
+- Visual winner highlighting
+- Responsive design for all devices
 
+## How to Play 
 
-Thank You!
-Tic-Tac-Toe Project by: VEDANT NARAYAN
+1. Enter player names (or use defaults)
+2. Select board size (3×3, 4×4, or 5×5)
+3. Choose game mode (Standard or Reverse)
+4. Click "Start Game"
+5. Alternate turns clicking cells to place your mark
+6. First to complete a row (or last in Reverse mode) wins!
+
+[Watch Demo Video](https://drive.google.com/file/d/1Vxp5G3lbUUrtqCqX4XahkWwozbC_0T_d/view?usp=sharing)
+
+## Technical Details 
+
+### Built With
+- **Frontend**: HTML5, CSS3, JavaScript
+- **Libraries**:
+  - Font Awesome (for icons)
+  - Canvas Confetti (for celebrations)
+- **Audio**: Mixkit sound effects
+
+### Code Structure
+- `index.html` - Game structure and UI
+- Embedded CSS - Styling and animations
+- JavaScript - Game logic and interactivity
+
+## Future Enhancements 
+- [ ] Single-player vs AI mode
+- [ ] Difficulty levels
+- [ ] Game history/replay
+- [ ] Custom themes/colors
+- [ ] Mobile app version
+
+## Project by: Vedant Narayan**  
+[![GitHub](https://img.shields.io/badge/GitHub-Ved05nara-blue?logo=github)](https://github.com/Ved05nara)
