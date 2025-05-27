@@ -2,7 +2,8 @@
 
 A feature-rich, interactive Tic-Tac-Toe game built with HTML5, CSS3, and JavaScript.
 
-![image](https://github.com/user-attachments/assets/500a9b29-f62f-4ef1-a6c4-f571abd56d40)
+![image](https://github.com/user-attachments/assets/e68a8912-0914-47f9-b2ec-8db0469ba00b)
+
 
 ## Features 
 
@@ -44,7 +45,7 @@ A feature-rich, interactive Tic-Tac-Toe game built with HTML5, CSS3, and JavaScr
 - **Audio**: Mixkit sound effects
 
 ### Code Structure
-- `index.html` - Game structure and UI
+- `tictactoe.html` - Game structure and UI
 - Embedded CSS - Styling and animations
 - JavaScript - Game logic and interactivity
 
