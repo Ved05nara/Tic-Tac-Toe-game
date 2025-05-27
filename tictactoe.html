@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tic Tac Toe</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-papEr3w+QW2Ew1+1YZoMFWwlYBlECFgFpZzNAXZbGLZ7yxUG2x6AyM0V5AKMwD9jFx8V9EQGiWROafq8vhp9vA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+            :root {
+              --primary-color: #ffffff;
+              --primary-hover: #ffc107;
+            }
+
+            * {
+              box-sizing: border-box;
+            }
+
+            body {
+              font-family: "Segoe UI", sans-serif;
+              background: linear-gradient(135deg, #1e1e2f, #2c3e50);
+              color: #fff;
+              display: flex;
+              flex-direction: column;
+              min-height: 100vh;
+              margin: 0;
+            }
+
+            h1 {
+              margin: 20px 0 10px;
+              text-align: center;
+            }
+
+            #status {
+              font-size: 1.2rem;
+              margin-bottom: 10px;
+              text-align: center;
+            }
+
+            #score {
+              font-size: 1rem;
+              margin-bottom: 20px;
+              text-align: center;
+            }
+
+            .board {
+              display: grid;
+              grid-gap: 10px;
+              margin: 0 auto;
+            }
+
+            .cell {
+              width: 80px;
+              height: 80px;
+              background: #ffffff;
+              color: #000;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 2rem;
+              cursor: pointer;
+              border-radius: 12px;
+              box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+              transition: background 0.3s, transform 0.2s;
+            }
+
+            .cell:hover {
+              background: #f0f0f0;
+              transform: scale(1.05);
+            }
+
+            .winner {
+              background: #00c896 !important;
+              color: #fff;
+            }
+
+            button,
+            select,
+            input {
+              margin-top: 10px;
+              padding: 10px;
+              font-size: 1rem;
+              border: none;
+              border-radius: 8px;
+              background: #000000;
+              color: #ffffff;
+              cursor: pointer;
+              transition: background 0.3s;
+            }
+
+            button:hover,
+            select:hover,
+            input:hover {
+              background: #222222;
+            }
+
+            .controls {
+              display: flex;
+              gap: 10px;
+              margin-bottom: 10px;
+              flex-wrap: wrap;
+              justify-content: center;
+            }
+
+            canvas {
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              pointer-events: none;
+              z-index: 10;
+            }
+
+            footer {
+              margin-top: auto;
+              width: 100%;
+              background: rgba(0, 0, 0, 0.7);
+              color: white;
+              padding: 1.5rem 1rem;
+              text-align: center;
+            }
+
+            .footer-logo {
+              max-width: 180px;
+              margin: 0 auto 15px;
+            }
+
+            .social-links a {
+              color: #fff;
+              margin: 0 10px;
+              font-size: 1.5rem;
+              transition: all 0.3s ease;
+            }
+
+            .social-links a:hover {
+              color: #ffc107;
+              transform: translateY(-3px);
+            }
+
+            .container {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            position: relative;
+            width: 100%;
+        background-color: #111111;
+        background-image: linear-gradient(
+          32deg,
+          rgba(8, 8, 8, 0.74) 30px,
+          transparent
+        );
+        background-size: 60px 60px;
+        background-position: -5px -5px;
+      }
+           .game-area {
+              flex: 1;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+            }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <canvas id="confetti-canvas"></canvas>
+      <div class="game-area">
+        <h1>Tic Tac Toe</h1>
+        <div class="controls">
+          <input type="text" id="playerX" placeholder="Player X name" />
+          <input type="text" id="playerO" placeholder="Player O name" />
+          <select id="boardSize">
+            <option value="3">3 x 3</option>
+            <option value="4">4 x 4</option>
+            <option value="5">5 x 5</option>
+          </select>
+          <select id="mode">
+            <option value="normal">Standard X-O</option>
+            <option value="reverse">Reverse X-O</option>
+          </select>
+          <button onclick="startGame()">Start Game</button>
+        </div>
+
+        <div id="status">Enter names and select board size to start</div>
+        <div id="score">Score - X: 0 | O: 0</div>
+        <div class="board" id="board"></div>
+        <button onclick="resetGame()">Restart</button>
+
+        <audio
+          id="clickSound"
+          preload="auto"
+          src="https://assets.mixkit.co/sfx/preview/mixkit-arcade-game-jump-coin-216.mp3"
+        ></audio>
+        <audio
+          id="winSound"
+          preload="auto"
+          src="https://assets.mixkit.co/sfx/preview/mixkit-winning-chimes-2015.mp3"
+        ></audio>
+      </div>
+
+      <footer>
+        <p>Tic-Tac-Toe game by Vedant Narayan</p>
+      </footer>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+      const boardEl = document.getElementById("board");
+      const statusEl = document.getElementById("status");
+      const scoreEl = document.getElementById("score");
+      const clickSound = document.getElementById("clickSound");
+      const winSound = document.getElementById("winSound");
+
+      let board = [];
+      let currentPlayer = "X";
+      let gameActive = false;
+      let size = 3;
+      let reverseMode = false;
+      let playerNames = { X: "Player X", O: "Player O" };
+      let scores = { X: 0, O: 0 };
+
+      // Initialize audio elements
+      clickSound.volume = 0.5;
+      winSound.volume = 0.5;
+
+      function startGame() {
+        const nameX = document.getElementById("playerX").value || "Player X";
+        const nameO = document.getElementById("playerO").value || "Player O";
+        size = parseInt(document.getElementById("boardSize").value);
+        reverseMode = document.getElementById("mode").value === "reverse";
+
+        playerNames = { X: nameX, O: nameO };
+        board = Array(size * size).fill("");
+        currentPlayer = "X";
+        gameActive = true;
+        boardEl.style.gridTemplateColumns = `repeat(${size}, 80px)`;
+        renderBoard();
+        statusEl.textContent = `${
+          playerNames[currentPlayer]
+        }'s turn (${currentPlayer}) - ${
+          reverseMode ? "Reverse" : "Standard"
+        } Mode`;
+        updateScore();
+      }
+
+      function renderBoard() {
+        boardEl.innerHTML = "";
+        board.forEach((cell, i) => {
+          const cellEl = document.createElement("div");
+          cellEl.classList.add("cell");
+          cellEl.textContent = cell;
+          cellEl.addEventListener("click", () => handleMove(i));
+          boardEl.appendChild(cellEl);
+        });
+      }
+
+      function handleMove(index) {
+        if (!gameActive || board[index]) return;
+
+        // Play click sound
+        clickSound.currentTime = 0;
+        clickSound.play().catch((e) => console.log("Audio play failed:", e));
+
+        board[index] = currentPlayer;
+        renderBoard();
+        checkWinner();
+        if (gameActive) {
+          currentPlayer = currentPlayer === "X" ? "O" : "X";
+          statusEl.textContent = `${
+            playerNames[currentPlayer]
+          }'s turn (${currentPlayer}) - ${
+            reverseMode ? "Reverse" : "Standard"
+          } Mode`;
+        }
+      }
+
+      function checkWinner() {
+        const lines = [];
+        for (let i = 0; i < size; i++) {
+          const row = [],
+            col = [];
+          for (let j = 0; j < size; j++) {
+            row.push(i * size + j);
+            col.push(j * size + i);
+          }
+          lines.push(row, col);
+        }
+
+        const mainDiag = [],
+          antiDiag = [];
+        for (let i = 0; i < size; i++) {
+          mainDiag.push(i * size + i);
+          antiDiag.push(i * size + (size - i - 1));
+        }
+        lines.push(mainDiag, antiDiag);
+
+        for (let line of lines) {
+          if (line.every((i) => board[i] === currentPlayer)) {
+            gameActive = false;
+            const winner = reverseMode
+              ? currentPlayer === "X"
+                ? "O"
+                : "X"
+              : currentPlayer;
+            scores[winner]++;
+            updateScore();
+            statusEl.textContent = `${playerNames[winner]} wins!`;
+            highlightWinner(line);
+
+            // Play win sound
+            winSound.currentTime = 0;
+            winSound
+              .play()
+              .catch((e) => console.log("Win sound play failed:", e));
+
+            triggerConfetti();
+            return;
+          }
+        }
+
+        if (!board.includes("")) {
+          gameActive = false;
+          statusEl.textContent = "It's a draw!";
+        }
+      }
+
+      function highlightWinner(pattern) {
+        const cells = document.querySelectorAll(".cell");
+        pattern.forEach((i) => cells[i].classList.add("winner"));
+      }
+
+      function resetGame() {
+        if (!size) return;
+        board = Array(size * size).fill("");
+        currentPlayer = "X";
+        gameActive = true;
+        statusEl.textContent = `${
+          playerNames[currentPlayer]
+        }'s turn (${currentPlayer}) - ${
+          reverseMode ? "Reverse" : "Standard"
+        } Mode`;
+        renderBoard();
+      }
+
+      function updateScore() {
+        scoreEl.textContent = `Score - X: ${scores.X} | O: ${scores.O}`;
+      }
+
+      function triggerConfetti() {
+        // Create confetti effect
+        confetti({
+          particleCount: 150,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: [
+            "#ff0000",
+            "#00ff00",
+            "#0000ff",
+            "#ffff00",
+            "#ff00ff",
+            "#00ffff",
+          ],
+        });
+      }
+    </script>
+  </body>
+</html>
