@@ -56,5 +56,5 @@ A feature-rich, interactive Tic-Tac-Toe game built with HTML5, CSS3, and JavaScr
 - [ ] Custom themes/colors
 - [ ] Mobile app version
 
-## Project by: Vedant Narayan**  
+## Project by: Vedant Narayan
 [![GitHub](https://img.shields.io/badge/GitHub-Ved05nara-blue?logo=github)](https://github.com/Ved05nara)
